@@ -37,3 +37,10 @@ vignettes/*.pdf
 
 # R Environment Variables
 .Renviron
+
+# Exported files
+export/*
+Rplots.pdf
+
+# macOS file
+.DS_Store
