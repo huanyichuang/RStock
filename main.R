@@ -4,12 +4,11 @@ library("quantmod")
 
 mySymbols<-c("ASML","VOO","VWO","TSM","NFLX","VEA")
 getSymbols(mySymbols)
-dataset<- xts() # Only run once
 startDate <- "2020-03-01"
 expDate <- format(Sys.Date(),"%Y-%m-%d")
+
 # https://stackoverflow.com/questions/34407583/looping-with-quantmod
 for (symbolName in mySymbols) {
-  
   data1 <- tryCatch( getSymbols( Symbols= symbolName))
   # 要用 get 把 xts 物件存下來
   if (is.null(data1)) next()
@@ -25,29 +24,3 @@ for (symbolName in mySymbols) {
   fileName<-paste(c(symbolName,expDate),collapse="-")
   saveChart("pdf",file=paste0("./export/",fileName,".pdf"))
 }
-# 計算 20日和60日均線
-#ma20_ASML<-runMean(ASML[,4],n=20)
-#ma60_ASML<-runMean(ASML[,4],n=60)
-#ma20_VOO<-runMean(VOO[,4],n=20)
-#ma60_VOO<-runMean(VOO[,4],n=60)
-#ma20_VWO<-runMean(VWO[,4],n=20)
-#ma60_VWO<-runMean(VWO[,4],n=60)
-# head(ma20, 25)
-
-# 畫上線
-#chartSeries(ASML["2017-01-03::2021-01-30",], theme = "white")
-#addTA(ma20_ASML,on=1,col="blue")
-#addTA(ma60_ASML,on=1,col="red")
-
-#fileName<-paste(c("ASML", expDate),collapse="-")
-#saveChart("pdf",file=paste0("export/",fileName,".pdf"))
-#chartSeries(VOO["2017-01-03::2021-01-30",], theme = "white")
-#addTA(ma20_VOO,on=1,col="blue")
-#addTA(ma60_VOO,on=1,col="red")
-#fileName<-paste(c("VOO", expDate),collapse="-")
-#saveChart("pdf",file=paste0("export/",fileName,".pdf"))
-#chartSeries(VWO["2017-01-03::2021-01-30",], theme = "white")
-#addTA(ma20_VWO,on=1,col="blue")
-#addTA(ma60_VWO,on=1,col="red")
-#fileName<-paste(c("VWO", expDate),collapse="-")
-#saveChart("pdf",file=paste0("export/",fileName,".pdf"))
